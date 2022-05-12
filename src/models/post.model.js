@@ -7,6 +7,10 @@ const postSchema = new mongoose.Schema(
             unique: true,
             required: true,
         },
+        title: {
+            type: String,
+            required: true,
+        },
         post: {
             type: String,
             required: true,

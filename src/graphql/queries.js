@@ -5,13 +5,21 @@ const { User, Post } = require('../models')
 
 
 
-const userById = {
-    type: UserType,
-    description: 'Query user submission by id',
+const users = {
+    type : new GraphQLList(UserType), 
+    description: 'Query all users in the database',
+    resolve( parent, args ) {
+        return User.find()
+    }
+}
+
+const user = {
+    type : UserType, 
+    description: 'Query user by id',
     args: {
-        id: { type: GraphQLString }
+        id: { type: GraphQLID }
     },
-    async resolve(parent, args) {
+    resolve( parent, args ) {
         return User.findById(args.id)
     }
 }
@@ -36,4 +44,4 @@ const posts = {
 }
 
 
-module.exports = { userById, postById, posts }
+module.exports = { users, user, postById, posts }
