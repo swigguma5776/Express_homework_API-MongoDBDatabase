@@ -28,7 +28,8 @@ const PostType = new GraphQLObjectType({
     description: 'Post type',
     fields: () => ({
         id: { type: GraphQLID },
-        text: { type: GraphQLString},
+        title: { type: GraphQLString},
+        description: { type: GraphQLString},
         userId: { type: GraphQLString },
         user: { 
             type: UserType,
@@ -39,5 +40,14 @@ const PostType = new GraphQLObjectType({
     })
 })
 
-module.exports = { UserType, PostType }
+const PostInputType = new GraphQLInputObjectType({
+    name: 'PostInput',
+    description: 'Post input type',
+    fields: () => ({
+        title: { type: GraphQLString },
+        order: { type: GraphQLInt }
+    })
+})
+
+module.exports = { UserType, PostType, PostInputType }
 

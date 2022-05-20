@@ -1,5 +1,5 @@
 const { GraphQLString, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLInt } = require('graphql')
-const { PostType } = require('./types')
+const { PostInputType } = require('./types')
 const { User, Post } = require('../models')
 const { createJwtToken } = require('../util/auth')
 
@@ -47,7 +47,10 @@ const login = {
 const createPost = {
     type: GraphQLString,
     args: {
-        text: {
+        title: {
+            type: GraphQLString
+        },
+        description: {
             type: GraphQLString
         },
         userId: {
@@ -55,16 +58,43 @@ const createPost = {
         }
     },
     async resolve(parent, args) {
+        // try{
+    //     /* Generate slug version of post for url */
+    //     let slugify = args.title.toLowerCase()
+    //         .replace(/[^\w ]+/g, '')
+    //         .replace(/ +/g, '-')
+    //     let fullSlug = ''
+
+    //     /* Add a random integer to the end of the slug, check that slug doesn't already exist.
+    //     *  If it does exist, generate new slug. Else continue.
+    //     */
+    //     while (true) {
+    //         let slugId = Math.floor(Math.random()*10000)
+    //         fullSlug = `${slugify}-${slugId}`
+
+    //         const existingPost = await Post.findOne({ slug: fullSlug })
+            
+    //         if (!existingPost)
+    //             break;
+    //     }
 
         const post = new Post({
-            text: args.text,
+            title: args.title,
+            description: args.description,
             userId: args.userId,
             createdDate: (new Date()).toString()
         })
 
+        console.log(post)
         await post.save()
 
         return post.id
+        // }
+        // catch(e) {
+        //     e.response.data.errors.forEach(error => console.log(error))
+        //     return ''
+        // }
+        
     }
 }
 

@@ -2,16 +2,16 @@ const mongoose = require("mongoose")
 
 const postSchema = new mongoose.Schema(
     {
-        slug: {
-            type: String,
-            unique: true,
-            required: true,
-        },
+        // slug: {
+        //     type: String,
+        //     unique: true,
+        //     required: true,
+        // },
         title: {
             type: String,
             required: true,
         },
-        post: {
+        description: {
             type: String,
             required: true,
         },

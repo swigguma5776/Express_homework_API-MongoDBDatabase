@@ -1,5 +1,28 @@
-<%- include ('../partials/header') %> 
+<%- include('../partials/header.ejs') %>
 
-    <h1>Profile Page</h1>
+<main class="container">
+    <h1 class="my-4">Tweeta - Profile</h1>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Posts</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (const post of user.posts) { %>
+                <tr>
+                    <td>
+                        <p><strong>Post Title</p></strong>
+                        <p class="mb-0"><%= post.title %></p>
+                        <br>
+                        <p><strong>Post Description</p></strong>
+                        <p class="mb-0"><%= post.description %></p>   
+                    </td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</main>
 
-<%- include ('../partials/footer') %> 
+<%- include('../partials/footer.ejs') %>
+    

@@ -1,5 +1,5 @@
 const { GraphQLList, GraphQLID, GraphQLString } = require('graphql')
-const { UserType, QuizType, SubmissionType, PostType } = require('./types')
+const { UserType, PostType } = require('./types')
 const { User, Post } = require('../models')
 
 
